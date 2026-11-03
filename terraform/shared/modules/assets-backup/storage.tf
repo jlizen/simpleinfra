@@ -13,6 +13,11 @@ resource "google_storage_bucket" "backup_buckets" {
   # Use Archive storage class for cost optimization
   storage_class = "ARCHIVE"
 
+  # Backups should never be publicly readable
+  public_access_prevention     = "enforced"
+  # Access is managed via IAM rather than ACLs
+  uniform_bucket_level_access  = true
+
   # Enable versioning to protect against accidental deletion/modification
   versioning {
     enabled = true
